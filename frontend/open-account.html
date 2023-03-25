@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Account</title>
+    <link rel="stylesheet" href="style/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Create Account</h1>
+    <div class="center">
+      <form id="create-account-form">
+        <label for="customer-id">Customer ID:</label>
+        <input type="text" id="customer-id" name="customer-id" required>
+        <label for="initial-credit">Initial Credit:</label>
+        <input type="text" id="initial-credit" name="initial-credit" required>
+        <input type="submit" value="Create Account">
+      </form>
+    </div>
+    <script>
+      const form = document.getElementById('create-account-form');
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const customerId = document.getElementById('customer-id').value;
+        const initialCredit = document.getElementById('initial-credit').value;
+        axios.post('http://localhost:8080/v1/api/account', {
+          customerId: customerId,
+          initialCredit: initialCredit
+          } , {  
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => {
+            // redirect to account info page with prepopulated account id
+            const accountId = response.data.accountId;
+            window.location.href = `account-info.html?account-id=${accountId}`;
+          })
+          .catch(error => {
+            console.error(error);
+            alert('An error occurred while creating the account.');
+          });
+      });
+    </script>
+  </body>
+</html>
