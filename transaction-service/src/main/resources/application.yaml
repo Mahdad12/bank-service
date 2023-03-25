@@ -1,0 +1,12 @@
+server:
+  port: 8090
+
+transaction-service:
+  title: Transaction Service Api
+  description: The Transaction service is responsible for providing Transaction information
+  version: 1.0.0
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true

@@ -1,0 +1,13 @@
+spring:
+  flyway:
+    url: jdbc:h2:mem:transactiontestdb;DB_CLOSE_DELAY=-1;
+    user: sa
+    locations: classpath:db/migration
+    password: 123
+    baseline-on-migrate: true
+
+datasource:
+  url: jdbc:h2:mem:transactiontestdb;DB_CLOSE_DELAY=-1;
+  driverClassName: org.h2.Driver
+  username: sa
+  password: 123

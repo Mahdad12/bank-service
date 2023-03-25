@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+account-service:
+  title: Account Service Api
+  description: The Account service is responsible for providing Account information
+  version: 1.0.0
+
+client:
+  transaction:
+    baseUrl: http://transaction-service:8090/v1/api/transaction
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+spring:
+  cloud:
+    openfeign:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+            loggerLevel: basic
