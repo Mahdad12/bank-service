@@ -4,7 +4,7 @@ The **Transaction Service** is responsible for create a transaction for an accou
 
 To build the project run following docker command from same directory:
 
-`docker build -t transaction-service:1.0.1 .`
+`docker build -t transaction-service .`
 
 You can see document link in below:
 
