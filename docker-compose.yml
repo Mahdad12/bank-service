@@ -1,0 +1,22 @@
+services:
+  account-service:
+    image: 'account-service'
+    container_name: account-service
+    ports:
+      - 8080:8080
+    depends_on:
+      - transaction-service
+    networks:
+      - my-network
+
+  transaction-service:
+    image: 'transaction-service'
+    container_name: transaction-service
+    ports:
+      - 8090:8090
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

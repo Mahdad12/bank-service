@@ -1,0 +1,1 @@
+CREATE INDEX idx_transaction_account_id ON TRANSACTION_DATA (account_id);
