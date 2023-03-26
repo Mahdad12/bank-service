@@ -33,3 +33,10 @@ jobs:
           context: ./transaction-service
           push: true
           tags: mahdad12/transaction-service:latest
+
+      - name: Build and push transaction-service Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          push: true
+          tags: mahdad12/frontend:latest
