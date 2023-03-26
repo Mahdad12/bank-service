@@ -1,6 +1,6 @@
 services:
   account-service:
-    image: 'account-service:1.0.1'
+    image: 'account-service'
     container_name: account-service
     ports:
       - 8080:8080
@@ -10,7 +10,7 @@ services:
       - my-network
 
   transaction-service:
-    image: 'transaction-service:1.0.1'
+    image: 'transaction-service'
     container_name: transaction-service
     ports:
       - 8090:8090

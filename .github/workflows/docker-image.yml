@@ -16,6 +16,3 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image for the transaction service
       run: docker build -t transaction-service -f transaction-service/Dockerfile .
-    - name: Build the Docker image for the account service
-      run: docker build -t account-service -f account-service/Dockerfile .
-
