@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image for the transaction service
+      run: docker build -t transaction-service -f transaction-service/Dockerfile .
+    - name: Build the Docker image for the account service
+      run: docker build -t account-service -f account-service/Dockerfile .
+

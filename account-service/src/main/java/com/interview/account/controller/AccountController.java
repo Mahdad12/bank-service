@@ -40,6 +40,7 @@ public class AccountController {
     @Operation(summary = "Create an account, if initial credit is bigger than zero create a transaction too")
     @ApiResponse(responseCode = "404", description = "Customer not found")
     @ApiResponse(responseCode = "200", description = "Account created successfully")
+    @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OpenAccountResponse> openAccount(@RequestBody OpenAccountRequest request) {
         Customer customer = customerService.getCustomer(request.getCustomerId());
