@@ -62,3 +62,5 @@ The output can be seen in the following address:
 * Gradle 8.0.2
 * Docker
 * HTML/CSS/Java Script (Axios)
+* CI/CD using github action and docker repository 
+  (build and publish images for 3 different services to separate docker repository)
