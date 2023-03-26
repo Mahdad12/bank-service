@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Account Information</title>
+    <link rel="stylesheet" href="style/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Account Information</h1>
+    <div class="center">
+      <form id="account-info-form">
+        <label for="account-id">Account ID:</label>
+        <input type="text" id="account-id" name="account-id" required>
+        <input type="submit" value="Get Account Information">
+      </form>
+    </div>
+    <div class="center">
+      <table id="account-info-table">
+        <tr>
+          <th>First Name</th>
+          <td id="first-name"></td>
+        </tr>
+        <tr>
+          <th>Last Name</th>
+          <td id="last-name"></td>
+        </tr>
+        <tr>
+          <th>Balance</th>
+          <td id="balance"></td>
+        </tr>
+        <tr>
+          <th>Transactions</th>
+          <td id="transactions"></td>
+        </tr>
+      </table>
+    </div>
+    <script>
+      // Check if there's an account ID in the URL
+      window.onload = function() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const accountId = urlParams.get('account-id');
+          if (accountId) {
+            const accountInfoForm = document.getElementById('account-info-form');
+            accountInfoForm.elements['account-id'].value = accountId;
+            accountInfoForm.dispatchEvent(new Event('submit'));
+          }
+      };
+
+      const accountInfoForm = document.getElementById('account-info-form');
+      accountInfoForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const accountId = document.getElementById('account-id').value;
+        axios.get(`http://localhost:8080/v1/api/account/${accountId}`)
+          .then(response => {
+            const account = response.data;
+            document.getElementById('first-name').textContent = account.firstName;
+            document.getElementById('last-name').textContent = account.lastName;
+            document.getElementById('balance').textContent = account.balance;
+            const transactionsTable = document.createElement('table');
+            transactionsTable.style.borderCollapse = 'collapse';
+
+            const headerRow = document.createElement('tr');
+
+            const descriptionHeader = document.createElement('th');
+            descriptionHeader.textContent = 'Date';
+            headerRow.appendChild(descriptionHeader);
+
+            const amountHeader = document.createElement('th');
+            amountHeader.textContent = 'Amount';
+            headerRow.appendChild(amountHeader);
+
+            transactionsTable.appendChild(headerRow);
+
+            account.transactions.forEach(transaction => {
+              const row = document.createElement('tr');
+
+              const dateCell = document.createElement('td');
+              dateCell.textContent = transaction.createdAt;
+              row.appendChild(dateCell);
+
+              const amountCell = document.createElement('td');
+              amountCell.textContent = transaction.amount;
+              row.appendChild(amountCell);
+
+              transactionsTable.appendChild(row);
+            });
+
+            const transactionsCell = document.getElementById('transactions');
+            transactionsCell.textContent = '';
+            transactionsCell.appendChild(transactionsTable);
+          })
+          .catch(error => {
+            console.error(error);
+            alert('An error occurred while getting the account information.');
+          });
+      });
+</script>
+
+  </body>
+</html>

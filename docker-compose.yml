@@ -16,6 +16,13 @@ services:
       - 8090:8090
     networks:
       - my-network
+  frontend:
+    image: frontend
+    container_name: frontend
+    ports:
+      - '8000:80'
+    networks:
+      - my-network
 
 networks:
   my-network:
